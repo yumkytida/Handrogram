@@ -30,8 +30,10 @@ class User < ApplicationRecord
   def following?(other_user)
     self.followings.include?(other_user)
   end
-
-  #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, length: { in: 2..20 }
   validates :introduction, length: { maximum: 50 }
+
+  def already_liked?(post)
+    self.likes.exists?(post_id: post.id)
+  end
 end

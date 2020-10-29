@@ -11,18 +11,11 @@
 					<td><%= link_to @post.title, post_path(@post) %></td>
 					<td><%= @post.body %></td>
 					<td>
-						<% if @post.favorited_by?(current_user) %>
-							<li>
-							  <%= link_to post_favorites_path(@post), method: :delete, class: 'glyphicon glyphicon-heart heart' do %>
-							    <%= @post.favorites.count %>
-							  <% end %>
-							</li>
-							<% else %>
-							<li>
-							  <%= link_to post_favorites_path(@post), method: :post, class: 'glyphicon glyphicon-heart-empty heart-empty' do %>
-							    <%= @post.favorites.count %>
-							  <% end %>
-							</li>
+						<p>いいね件数: <%= @post.likes.count %></p>
+						<% if current_user.already_liked?(@post) %>
+						  <%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
+						<% else %>
+						  <%= button_to 'いいね', post_likes_path(@post) %>
 						<% end %>
 					</td>
 					<% if @post.user == current_user %>
