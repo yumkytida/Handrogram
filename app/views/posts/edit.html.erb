@@ -1,0 +1,26 @@
+<div class="row">
+	posts/edit
+<% if @book.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <%= @post.errors.count %>errors
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+
+		<h1>Editing Book</h1>
+
+		<%= render "posts/newform", post: @post %>
+		<%= link_to "Show", post_path(@post), class: "post_#{@post.id}" %>
+		<%= link_to "Back", posts_path, class: "back" %>
+
+	</div>
+	<div class="col-md-3"></div>
+
+</div>
+</div>

@@ -1,0 +1,64 @@
+<div class="row">
+		<h2>post detail</h2>
+		<table class="table">
+				<tr>
+					<td>
+						<%= link_to user_path(@post.user) do %>
+							<%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "50x50",  class: "pull-left profile-img", fallback: "no_image.jpg" %><br><br><br>
+						<%= @post.user.name %>
+						<% end %>
+					</td>
+					<td><%= link_to @post.title, post_path(@post) %></td>
+					<td><%= @post.body %></td>
+					<td>
+						<% if @post.favorited_by?(current_user) %>
+							<li>
+							  <%= link_to post_favorites_path(@post), method: :delete, class: 'glyphicon glyphicon-heart heart' do %>
+							    <%= @post.favorites.count %>
+							  <% end %>
+							</li>
+							<% else %>
+							<li>
+							  <%= link_to post_favorites_path(@post), method: :post, class: 'glyphicon glyphicon-heart-empty heart-empty' do %>
+							    <%= @post.favorites.count %>
+							  <% end %>
+							</li>
+						<% end %>
+					</td>
+					<% if @post.user == current_user %>
+					<td><%= link_to "Edit", edit_post_path(@book), class: "btn-sm btn-success edit_post_#{@post.id}" %></td>
+					<td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_post_#{@post.id}" %></td>
+					<% end %>
+				</tr>
+		</table>
+        <table class="table">
+          <tr>
+          <td>
+			 <% @post_comments.each do |post_comment| %> 
+			 <tr> 
+			 	<td class="show-comment"> 
+			 		<%= link_to user_path(post_comment.user), class: "user_#{post_comment.user.id}" do %>               <%= attachment_image_tag post_comment.user, :profile_image, fallback: "no_image.jpg", size: "50x50" %><br> 
+			 		<%= post_comment.user.name %> 
+			 		<% end %> 
+			 	</td> 
+			 	<td class="show-comment"><%= post_comment.comment %>
+			 	</td> 
+			 	<% if current_user == post_comment.user %> 
+			 	<td><%= link_to "Destroy", post_post_comment_path(@post, post_comment), method: :delete, class: "btn-sm btn-danger " %></td>
+			 </tr> 
+			 	<% end %> 
+          </td>
+         <% end %>
+        <table class="table">
+          <tr>
+          <td>
+          	<%= form_for [@post, @post_comment] do |f| %>
+			  <div class="comment">
+			      <%= f.text_area :comment, class: "form-control" %>
+			  </div>
+			  <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+			<% end %>
+          </td>
+          </tr>
+	</div>
+</div>

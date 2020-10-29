@@ -1,0 +1,13 @@
+<div class="row">
+	タグ編集・追加
+<%= form_for(tag) do |f| %>
+	<div class="field row">
+		<%= f.label :body %>
+		<%= f.text_area :body, class: "col-xs-12 tag_body" %>
+	</div>
+
+	<div class="actions row">
+		<%= f.submit class: "btn btn-primary col-xs-12" %>
+	</div>
+<% end %>
+</div>
