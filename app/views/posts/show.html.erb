@@ -9,7 +9,7 @@
 						<% end %>
 					</td>
 					<td><%= link_to @post.title, post_path(@post) %></td>
-					<td><%= @post.body %></td>
+					<td><%= @post.introduction %></td>
 					<td>
 						<p>いいね件数: <%= @post.likes.count %></p>
 						<% if current_user.already_liked?(@post) %>
@@ -19,39 +19,10 @@
 						<% end %>
 					</td>
 					<% if @post.user == current_user %>
-					<td><%= link_to "Edit", edit_post_path(@book), class: "btn-sm btn-success edit_post_#{@post.id}" %></td>
-					<td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_post_#{@post.id}" %></td>
+					<td><%= link_to "Edit", edit_post_path(@post), class: "btn-sm btn-success edit_post_#{@post.id}" %></td>
+					<td><%= link_to "Destroy", post_path(@post), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_post_#{@post.id}" %></td>
 					<% end %>
 				</tr>
 		</table>
-        <table class="table">
-          <tr>
-          <td>
-			 <% @post_comments.each do |post_comment| %> 
-			 <tr> 
-			 	<td class="show-comment"> 
-			 		<%= link_to user_path(post_comment.user), class: "user_#{post_comment.user.id}" do %>               <%= attachment_image_tag post_comment.user, :profile_image, fallback: "no_image.jpg", size: "50x50" %><br> 
-			 		<%= post_comment.user.name %> 
-			 		<% end %> 
-			 	</td> 
-			 	<td class="show-comment"><%= post_comment.comment %>
-			 	</td> 
-			 	<% if current_user == post_comment.user %> 
-			 	<td><%= link_to "Destroy", post_post_comment_path(@post, post_comment), method: :delete, class: "btn-sm btn-danger " %></td>
-			 </tr> 
-			 	<% end %> 
-          </td>
-         <% end %>
-        <table class="table">
-          <tr>
-          <td>
-          	<%= form_for [@post, @post_comment] do |f| %>
-			  <div class="comment">
-			      <%= f.text_area :comment, class: "form-control" %>
-			  </div>
-			  <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-			<% end %>
-          </td>
-          </tr>
 	</div>
 </div>

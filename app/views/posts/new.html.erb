@@ -1,18 +1,32 @@
-<div class="row">
-	posts/new
-<%= form_for(post) do |f| %>
-	<div class="field row">
-		<%= f.label :title %>
-		<%= f.text_field :title, class: "col-xs-12 post_title" %>
-	</div>
+<div class=“container”>
+<body>
+	<div class="row">
+		posts/new
+	<%= form_for(@post) do |f| %>
+		<div class="field row">
+			<%= f.label :title %>
+			<%= f.text_field :title, class: "col-xs-12 post_title" %>
+		</div>
 
-	<div class="field row">
-		<%= f.label :body %>
-		<%= f.text_area :body, class: "col-xs-12 post_body" %>
-	</div>
+		<div class="field row">
+			<%= f.label :introduction %>
+			<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
+		</div>
 
-	<div class="actions row">
-		<%= f.submit class: "btn btn-primary col-xs-12" %>
+		 <div class="field row">
+    	<%= attachment_image_tag @post, :post_image, fallback: "no-image.png", id: "img_prev", style: "height: 250px; width:300px;" %><br>
+    	<%= f.attachment_field :post_image %>
+  		</div>
+
+		<div class="article-tags-field">
+			<%= f.label "カテゴリー" %>
+      		<ul id="article-tags">
+      		</ul>
+    	</div>
+		<div class="actions row">
+			<%= f.submit class: "btn btn-primary col-xs-12" %>
+		</div>
+	<% end %>
 	</div>
-<% end %>
+</body>
 </div>

@@ -1,26 +1,46 @@
 <div class="row">
-	posts/edit
-<% if @book.errors.any? %>
-  <div class="alert alert-warning">
-    <ul>
-      <%= @post.errors.count %>errors
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+		posts/edit
+	<% if @post.errors.any? %>
+	  <div class="alert alert-warning">
+	    <ul>
+	      <%= @post.errors.count %>errors
+	      <% @post.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+</div>
 <div class="row">
+	<%= form_for(@post) do |f| %>
 	<div class="col-md-6 col-md-offset-3">
+		<div class="field row">
+			<%= f.label :title %>
+			<%= f.text_field :title, class: "col-xs-12 post_title" %>
+		</div>
 
-		<h1>Editing Book</h1>
+		<div class="field row">
+			<%= f.label :introduction %>
+			<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
+		</div>
 
-		<%= render "posts/newform", post: @post %>
-		<%= link_to "Show", post_path(@post), class: "post_#{@post.id}" %>
-		<%= link_to "Back", posts_path, class: "back" %>
+		<div class="field row">
+			<%= f.label :image_id %>
+		</div>
+
+		<div class="article-tags-field">
+	    <%= f.label "カテゴリ" %>
+	    <ul id="post-tags">
+	    </ul>
+	    <%= hidden_field_tag :tag_hidden,@tag_list %>
+		</div>
+
+		<div class="actions row">
+			<%= f.submit class: "btn btn-primary col-xs-12" %>
+		</div>
 
 	</div>
-	<div class="col-md-3"></div>
-
-</div>
+	<% end %>
+		<%= link_to "Show", post_path(@post), class: "post_#{@post.id}" %>
+		<%= link_to "Back", posts_path, class: "back" %>
 </div>

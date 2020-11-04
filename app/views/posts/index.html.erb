@@ -11,7 +11,7 @@
 <div class="row">
 		<h2>Posts index</h2>
 		<% @all_ranks.each do |post| %>
-		<%= link_to post.title, post_path(book), class: "post_#{post.id}" %>
+		<%= link_to post.title, post_path(post), class: "post_#{post.id}" %>
 		<% end %>
 		<table class="table table-hover table-inverse">
 			<thead>
@@ -30,28 +30,8 @@
 							<%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "50x50",  class: "pull-left profile-img", fallback: "no_image.jpg" %>
 						<% end %>
 						</td>
-						<td><%= link_to post.title, post_path(book), class: "post_#{post.id}" %></td>
-						<td><%= post.body %></td>
-                    <td>
-						<% if post.favorited_by?(current_user) %>
-							<li>
-							  <%= link_to post_favorites_path(post), method: :delete, class: 'glyphicon glyphicon-heart heart' do %>
-							    <%= post.favorites.count %>
-							  <% end %>
-							</li>
-							<% else %>
-							<li>
-							  <%= link_to post_favorites_path(post), method: :post, class: 'glyphicon glyphicon-heart-empty heart-empty' do %>
-							    <%= post.favorites.count %>
-							  <% end %>
-							</li>
-						<% end %>
-					</td>
-					<td>
-						  <li>
-						    <%= link_to "コメント数: #{post.post_comments.count}", post_path(post.id) %>
-						  </li>
-					</td>
+						<td><%= link_to post.title, post_path(post), class: "post_#{post.id}" %></td>
+						<td><%= post.introduction %></td>
 				</tr>
 			　<% end %>
 			</tbody>

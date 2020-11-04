@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'home/about' => 'home#about'
   resources :tags, only: [:new, :create, :index, :show]
   resource :relationships, only: [:create, :destroy]
-  resources :posts, only: [:new, :create, :index, :show] do
+  resources :posts, only: [:new, :create, :index, :show, :destroy] do
   	resources :post_comments, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
   end

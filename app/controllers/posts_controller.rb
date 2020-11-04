@@ -9,8 +9,8 @@ before_action :authenticate_user!
     @user = @post.user
     @post_new = Post.new
     @like = Like.new
-    @post_comment = PostComment.new
-    @post_comments = @post.post_comments
+    # @post_comment = PostComment.new
+    # @post_comments = @post.post_comments
   end
 
   def index
@@ -23,7 +23,9 @@ before_action :authenticate_user!
   def create
     @post = Post.new(post_params)
     @post.user = current_user
+    tag_list = params[:tag_list].split(",")
     if @post.save
+       @post.save_tags(tag_list)
       redirect_to post_path(@post), notice: "You have created book successfully."
     else
       @posts = Post.all
@@ -34,6 +36,7 @@ before_action :authenticate_user!
 
   def edit
     @post = Post.find(params[:id])
+    # @tag_list = @post.tags.pluck(:name).join(",")
     if current_user != @post.user
       redirect_to posts_path
     end
@@ -43,7 +46,9 @@ before_action :authenticate_user!
 
   def update
     @post = Post.find(params[:id])
+    tag_list = params[:tag_list].split(",")
     if @post.update(post_params)
+      @post.save_tags(tag_list)
       redirect_to post_path(@post), notice: "You have updated book successfully."
     else
       render "edit"
@@ -59,7 +64,7 @@ before_action :authenticate_user!
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :introduction, :image_id, :tag_id)
   end
 
 end
