@@ -13,9 +13,10 @@
 			<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
 		</div>
 
-		 <div class="field row">
-    	<%= attachment_image_tag @post, :post_image, fallback: "no-image.png", id: "img_prev", style: "height: 250px; width:300px;" %><br>
-    	<%= f.attachment_field :post_image %>
+		<div class="field row">
+		<%= f.label :image %>
+    	<%= attachment_image_tag @post, :image_id, fallback: "no_image.jpg", id: "img_prev", style: "height: 250px; width:300px;" %>
+    	<%= f.attachment_field :image_id, class: "post_image" %>
   		</div>
 
 		<div class="article-tags-field">
