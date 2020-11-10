@@ -1,15 +1,22 @@
 <div class="row">
-		<h2>post detail</h2>
-		<table class="table">
-				<tr>
-					<td>
+	<h2>投稿詳細</h2>
+		<div class="row">
+					<span>
 						<%= link_to user_path(@post.user) do %>
-							<%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "50x50",  class: "pull-left profile-img", fallback: "no_image.jpg" %><br><br><br>
-						<%= @post.user.name %>
-						<% end %>
-					</td>
-					<td><%= link_to @post.title, post_path(@post) %></td>
-					<td><%= @post.introduction %></td>
+							<%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "50x50",  class: "pull-left profile-img", fallback: "no-image.png" %>
+					</span>
+					<span><%= @post.user.name %></span>
+		</div>
+		<div class="row">
+					<%= attachment_image_tag @post, :image, format: 'jpeg', class: "pull-center post-img", fallback: "no-image.png" %>
+		</div>
+		<div class="row">
+					<li><%= link_to @post.title, post_path(@post) %></li>
+					<li><%= @post.introduction %></li>
+					<% end %>
+		</div>
+		<div class="row">
+				<tr>
 					<td>
 						<p>いいね件数: <%= @post.likes.count %></p>
 						<% if current_user.already_liked?(@post) %>
@@ -24,5 +31,35 @@
 					<% end %>
 				</tr>
 		</table>
-	</div>
+		<table class="table">
+          <tr>
+			 <% @post_comments.each do |post_comment| %> 
+			 <tr> 
+			 	<td class="show-comment"> 
+			 		<span><%= link_to user_path(post_comment.user), class: "user_#{post_comment.user.id}" do %>               <%= attachment_image_tag post_comment.user, :profile_image, fallback: "no-image.png", size: "50x50" %></span> 
+			 		<span><%= post_comment.user.name %> </span>
+			 		<% end %> 
+			 	</td> 
+			 	<td class="show-comment"><%= post_comment.content %>
+			 	</td> 
+			 	<% if current_user == post_comment.user %> 
+			 	<td><%= link_to "Destroy", post_post_comment_path(@post, post_comment), method: :delete, class: "btn-sm btn-danger " %></td>
+			 </tr> 
+			 	<% end %> 
+      	  </tr>
+         <% end %>
+        </table>
+		<table class="table">
+          <tr>
+          <td>
+          	<%= form_for [@post, @post_comment] do |f| %>
+			  <div class="comment">
+			      <%= f.text_area :content, class: "form-control" %>
+			  </div>
+			  <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+			<% end %>
+          </td>
+          </tr>
+        </table>
+        <p><%= link_to ' 前のページに戻る', posts_path %></p>
 </div>

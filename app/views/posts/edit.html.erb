@@ -1,46 +1,62 @@
-<div class="row">
-		posts/edit
-	<% if @post.errors.any? %>
-	  <div class="alert alert-warning">
-	    <ul>
-	      <%= @post.errors.count %>errors
-	      <% @post.errors.full_messages.each do |message| %>
-	        <li><%= message %></li>
-	      <% end %>
-	    </ul>
-	  </div>
-	<% end %>
-</div>
-<div class="row">
-	<%= form_for(@post) do |f| %>
-	<div class="col-md-6 col-md-offset-3">
-		<div class="field row">
-			<%= f.label :title %>
-			<%= f.text_field :title, class: "col-xs-12 post_title" %>
-		</div>
-
-		<div class="field row">
-			<%= f.label :introduction %>
-			<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
-		</div>
-
-		<div class="field row">
-			<%= f.label :image_id %>
-		</div>
-
-		<div class="article-tags-field">
-	    <%= f.label "カテゴリ" %>
-	    <ul id="post-tags">
-	    </ul>
-	    <%= hidden_field_tag :tag_hidden,@tag_list %>
-		</div>
-
-		<div class="actions row">
-			<%= f.submit class: "btn btn-primary col-xs-12" %>
-		</div>
-
+<body>
+	<div class="row">
+		<% if @post.errors.any? %>
+		  <div class="alert alert-warning">
+		    <ul>
+		      <%= @post.errors.count %>errors
+		      <% @post.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		    </ul>
+		  </div>
+		<% end %>
 	</div>
-	<% end %>
-		<%= link_to "Show", post_path(@post), class: "post_#{@post.id}" %>
-		<%= link_to "Back", posts_path, class: "back" %>
-</div>
+	<div class="row">
+		<%= form_for(@post) do |f| %>
+		<div class="col-md-6 col-md-offset-3">
+			<div class="field">
+				<%= f.label :title %>
+				<%= f.text_field :title, class: "col-xs-12 post_title" %>
+			</div>
+
+			<div class="field">
+				<%= f.label :introduction %>
+				<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
+			</div>
+
+			<div class="field">
+			<%= f.label :写真 %><br />
+	    	<%= attachment_image_tag @post, :image, fallback: "no-image.png", id: "img_prev" %>
+	    	<%= f.attachment_field :image, class: "post_image" %>
+	  		</div>
+
+			<div class="field">
+				<%= f.submit "投稿する", class: "btn btn-primary col-xs-2 col-xs-offset-5" %>
+			</div>
+
+		</div>
+		<% end %>
+			<div class="field">
+			<%= link_to "Show", post_path(@post), class: "post_#{@post.id}" %>
+			<%= link_to "Back", posts_path, class: "back" %>
+			</div>
+	</div>
+
+	<script>
+		$(document).on("turbolinks:load", function(){
+		  function readURL(input) {
+		    if(input.files && input.files[0]){
+		      var reader = new FileReader();
+		      reader.onload = function (e) {
+		        $('#img_prev').attr('src', e.target.result);
+		      }
+		      reader.readAsDataURL(input.files[0]);
+		    }
+		  }
+		  $("#post_image").change(function(){
+		    readURL(this);
+		  });
+		});
+	</script>
+
+</body>

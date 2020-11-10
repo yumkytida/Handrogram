@@ -37,4 +37,48 @@
 
 header {
     color: white;
+    font-family: "Meiryo";
+    background-color: #593E0D;
 }
+
+ body{
+  color : #593e0d;
+  font-family: "Meiryo";
+  margin-right: auto;
+  margin-left : auto;
+  margin-top:120px;
+  width:1200px;
+  background-image: image-url("back.jpg");
+  text-align: center;
+}
+
+.inline-block_post {
+  display: inline-flex;
+  padding:  20px;
+  height: 100px;
+}
+
+
+.card {
+  width: 260px;
+  hight: 340px;
+  background-image: image-url("cookie.png");
+  margin: 30px 40px;
+  padding: 37px;
+}
+
+li {
+  list-style: none;
+}
+
+.field {
+  margin: 40px;
+  display: block;
+}
+
+.field-signup {
+  margin: 40px;
+  display: inline-flex;
+}
+
+

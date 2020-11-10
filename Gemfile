@@ -76,3 +76,4 @@ end
 
 gem 'pry-rails'
 gem 'pry-doc'
+gem 'acts-as-taggable-on', '~> 6.0'

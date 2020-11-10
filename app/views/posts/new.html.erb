@@ -1,33 +1,47 @@
-<div class=“container”>
-<body>
+<body  style="text-align: center;">
+
+　<h2>新規投稿する</h2>
 	<div class="row">
-		posts/new
-	<%= form_for(@post) do |f| %>
-		<div class="field row">
-			<%= f.label :title %>
-			<%= f.text_field :title, class: "col-xs-12 post_title" %>
-		</div>
+	  	<%= form_for(@post) do |f| %>
+	   	<div class="col-md-6 col-md-offset-3">
+			<div class="field">
+				<%= f.label :タイトル %><br><br>
+				<%= f.text_field :title, class: "col-xs-12 post_title" %>
+			</div>
 
-		<div class="field row">
-			<%= f.label :introduction %>
-			<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
-		</div>
+			<div class="field">
+				<%= f.label :コメント %><br><br>
+				<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
+			</div>
 
-		<div class="field row">
-		<%= f.label :image %>
-    	<%= attachment_image_tag @post, :image_id, fallback: "no_image.jpg", id: "img_prev", style: "height: 250px; width:300px;" %>
-    	<%= f.attachment_field :image_id, class: "post_image" %>
-  		</div>
+			<div class="field">
+				<%= f.label :写真 %><br><br>
+		    	<%= attachment_image_tag @post, :image, fallback: "no-image.png", id: "img_prev" %>
+		    	<%= f.attachment_field :image, class: "post_image" %>
+	  		</div>
 
-		<div class="article-tags-field">
-			<%= f.label "カテゴリー" %>
-      		<ul id="article-tags">
-      		</ul>
-    	</div>
-		<div class="actions row">
-			<%= f.submit class: "btn btn-primary col-xs-12" %>
+			<div class="field">
+				<%= f.submit "投稿する", class: "btn btn-primary col-xs-2 col-xs-offset-5" %>
+			</div>
 		</div>
-	<% end %>
+		<% end %>
 	</div>
+
+	<script>
+		$(document).on("turbolinks:load", function(){
+		  function readURL(input) {
+		    if(input.files && input.files[0]){
+		      var reader = new FileReader();
+		      reader.onload = function (e) {
+		        $('#img_prev').attr('src', e.target.result);
+		      }
+		      reader.readAsDataURL(input.files[0]);
+		    }
+		  }
+		  $("#post_image").change(function(){
+		    readURL(this);
+		  });
+		});
+	</script>
+
 </body>
-</div>
