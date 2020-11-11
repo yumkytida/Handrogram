@@ -11,6 +11,10 @@
 		<% end %>
 		<div class="row">
 			<h2>みんなの投稿</h2>
+			<div class="row">
+				<img src="/assets/rogo_header2_long.png" alt="ライン">
+			</div>
+
 			<h3>注目の投稿</h3>
 			<table class="table table-hover table-inverse">
 				<% @all_ranks.each do |post| %>
@@ -24,6 +28,10 @@
 					</div>
 					<% end %>
 			</table>
+			<div class="row">
+				<img src="/assets/rogo_header2_long.png" alt="ライン">
+			</div>
+
 			<table class="table table-hover table-inverse">
 				<h3>新着投稿</h3>
 					<% @posts.each do |post| %>
@@ -39,4 +47,3 @@
 			</table>
 		</div>
 </body>
-

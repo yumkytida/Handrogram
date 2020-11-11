@@ -1,36 +1,43 @@
-<div class="row">
+<body>
 	<h2>投稿詳細</h2>
 		<div class="row">
-					<span>
-						<%= link_to user_path(@post.user) do %>
-							<%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "50x50",  class: "pull-left profile-img", fallback: "no-image.png" %>
-					</span>
-					<span><%= @post.user.name %></span>
+			<img src="/assets/rogo_header2_long.png" alt="ライン">
 		</div>
-		<div class="row">
-					<%= attachment_image_tag @post, :image, format: 'jpeg', class: "pull-center post-img", fallback: "no-image.png" %>
+		<%= link_to user_path(@post.user) do %>
+			<div class="col-xs-6 col-md-offset-3">
+				<span><%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "50x50",  class: "pull-left profile-img", fallback: "no-image.png" %></span>
+				<span><%= @post.user.name %></span>
+			</div>
+		<% end %>
+
+			<div class="col-xs-6 col-md-offset-3">
+				<%= attachment_image_tag @post, :image, format: 'jpeg', class: "pull-center post-img", fallback: "no-image.png" %>
+			</div>
+			<div class="col-xs-6 col-md-offset-3" style="text-align: left;">
+				<h4>　　タイトル：　<%= @post.title %></h4>
+				<h4>　　一言：　　　<%= @post.introduction %></h4>
+			</div>
+
+		<div class="col-xs-6 col-md-offset-3">
+			<span>いいね件数: <%= @post.likes.count %></span>
+				<% if current_user.already_liked?(@post) %>
+			<span><%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete, class: "btn-sm btn-danger"  %></span>
+				<% else %>
+			<span><%= button_to 'いいね', post_likes_path(@post), class: "btn-sm btn-warning" %></span>
+				<% end %>
 		</div>
-		<div class="row">
-					<li><%= link_to @post.title, post_path(@post) %></li>
-					<li><%= @post.introduction %></li>
-					<% end %>
+
+		<div class="col-xs-6 col-md-offset-5" style="text-align: right;">
+				<% if @post.user == current_user %>
+			<span><%= link_to "編集", edit_post_path(@post), class: "btn-lg btn-warning edit_post_#{@post.id}" %></span>
+			<span><%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-lg btn-danger destroy_post_#{@post.id}" %></span>
+				<% end %>
 		</div>
+
 		<div class="row">
-				<tr>
-					<td>
-						<p>いいね件数: <%= @post.likes.count %></p>
-						<% if current_user.already_liked?(@post) %>
-						  <%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
-						<% else %>
-						  <%= button_to 'いいね', post_likes_path(@post) %>
-						<% end %>
-					</td>
-					<% if @post.user == current_user %>
-					<td><%= link_to "Edit", edit_post_path(@post), class: "btn-sm btn-success edit_post_#{@post.id}" %></td>
-					<td><%= link_to "Destroy", post_path(@post), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_post_#{@post.id}" %></td>
-					<% end %>
-				</tr>
-		</table>
+			<img src="/assets/rogo_header2_long.png" alt="ライン">
+		</div>
+
 		<table class="table">
           <tr>
 			 <% @post_comments.each do |post_comment| %> 
@@ -43,7 +50,7 @@
 			 	<td class="show-comment"><%= post_comment.content %>
 			 	</td> 
 			 	<% if current_user == post_comment.user %> 
-			 	<td><%= link_to "Destroy", post_post_comment_path(@post, post_comment), method: :delete, class: "btn-sm btn-danger " %></td>
+			 	<td><%= link_to "削除する", post_post_comment_path(@post, post_comment), method: :delete, class: "btn-sm btn-danger " %></td>
 			 </tr> 
 			 	<% end %> 
       	  </tr>
@@ -56,10 +63,10 @@
 			  <div class="comment">
 			      <%= f.text_area :content, class: "form-control" %>
 			  </div>
-			  <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+			  <%= f.submit "送信する", class: "btn btn-lg btn-warning btn-base-1 mt-20 pull-right" %>
 			<% end %>
           </td>
           </tr>
         </table>
-        <p><%= link_to ' 前のページに戻る', posts_path %></p>
-</div>
+        <p><%= link_to ' 投稿一覧ページに戻る', posts_path, class: "btn-sm btn-light" %></p>
+</body>

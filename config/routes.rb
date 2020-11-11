@@ -5,11 +5,9 @@ Rails.application.routes.draw do
   root 'home#top'
   get 'home/about' => 'home#about'
   resources :tags, only: [:new, :create, :index, :show]
-  resource :relationships, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   resources :posts, only: [:new, :create, :index, :show, :destroy] do
   	resources :post_comments, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
   end
 end
-
-# bookers2のルーティングを	真似して書いただけ・後で修正

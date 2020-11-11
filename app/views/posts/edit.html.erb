@@ -12,35 +12,43 @@
 		<% end %>
 	</div>
 	<div class="row">
+		<h2>投稿編集</h2>
+		<div class="row">
+			<img src="/assets/rogo_header2_long.png" alt="ライン">
+		</div>
 		<%= form_for(@post) do |f| %>
 		<div class="col-md-6 col-md-offset-3">
 			<div class="field">
-				<%= f.label :title %>
-				<%= f.text_field :title, class: "col-xs-12 post_title" %>
+				<%= f.label :タイトル %><br><br>
+				<%= f.text_field :title, class: "col-xs-12 post_title" %><br><br>
 			</div>
 
 			<div class="field">
-				<%= f.label :introduction %>
-				<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %>
+				<%= f.label :一言 %><br><br>
+				<%= f.text_area :introduction, class: "col-xs-12 post_introduction" %><br><br>
 			</div>
 
 			<div class="field">
-			<%= f.label :写真 %><br />
+			<%= f.label :写真 %><br><br>
 	    	<%= attachment_image_tag @post, :image, fallback: "no-image.png", id: "img_prev" %>
-	    	<%= f.attachment_field :image, class: "post_image" %>
+	    	<%= f.attachment_field :image, class: "post_image" %><br><br>
 	  		</div>
 
 			<div class="field">
-				<%= f.submit "投稿する", class: "btn btn-primary col-xs-2 col-xs-offset-5" %>
+				<%= f.submit "投稿する", class: "btn btn-warning col-xs-2 col-xs-offset-5" %><br><br>
 			</div>
 
 		</div>
 		<% end %>
-			<div class="field">
-			<%= link_to "Show", post_path(@post), class: "post_#{@post.id}" %>
-			<%= link_to "Back", posts_path, class: "back" %>
-			</div>
 	</div>
+		<div class="row">
+			<img src="/assets/rogo_header2_long.png" alt="ライン">
+		</div>
+
+		<div class="row">
+			<span><%= link_to "投稿詳細画面に移動", post_path(@post), class: "post_#{@post.id}, btn btn-warning col-xs-2 col-xs-offset-2" %></span>
+			<span><%= link_to "投稿一覧画面", posts_path, class: "back, btn btn-warning col-xs-2 col-xs-offset-4" %></span>
+		</div>
 
 	<script>
 		$(document).on("turbolinks:load", function(){

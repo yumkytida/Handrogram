@@ -1,7 +1,8 @@
-<body  style="text-align: center;">
-<div class="body" style="text-align: center;">
+<body>
 <h2>ユーザー編集</h2>
-
+	<div class="row">
+		<img src="/assets/rogo_header2_long.png" alt="ライン">
+	</div>
 	<%= form_for(@user) do |f| %>
 		<!-- エラーメッセージ表示-->
 		<% if @user.errors.any? %>
@@ -15,24 +16,25 @@
 			</div>
 		<% end %>
 
-		<div class="field" style="text-align: center;">
-			<%= f.label :名前 %><br />
-			<%= f.text_field :name, class: "name" %>
-		</div>
-
-		<div class="field" style="text-align: center;">
-			<%= f.label :写真 %><br />
+	<div class="col-md-6 col-md-offset-3">
+		<div class="field">
+			<%= f.label :写真 %><br /><br /><br />
 			<%= attachment_image_tag @user, :profile_image, fallback: "no-image.png", id: "img_prev" %>
 			<%= f.attachment_field :profile_image, class: "user_image" %>
 		</div>
 
-		<div class="field" style="text-align: center;">
-			<%= f.label :一言 %><br />
+		<div class="field">
+			<%= f.label :名前 %><br /><br />
+			<%= f.text_field :name, class: "name" %>
+		</div>
+
+		<div class="field">
+			<%= f.label :一言 %><br /><br />
 			<%= f.text_area :introduction, class: "introduction" %>
 		</div>
 
-		<div class="actions" style="text-align: center;">
-			<%= f.submit "更新する", class: "btn btn-primary col-xs-2" %>
+		<div class="field">
+			<%= f.submit "更新する", class: "btn btn-warning col-xs-2 col-xs-offset-5" %>
 		</div>
 
 	<% end %>
@@ -53,5 +55,5 @@
 		  });
 		});
 	</script>
-</div>
+	</div>
 </body>

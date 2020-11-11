@@ -1,6 +1,50 @@
 <body>
-<div class="body" style="text-align: center;">
+<div class="row">
 	<h2><%= @user.name %>さんの投稿</h2>
+	<% unless current_user == @user %>
+		<div class="col-xs-3">
+			<%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "200x200",  class: "pull-left profile-img",fallback: "no-image.png" %></tr>
+			</div>
+
+		<div class="col-xs-7">
+			<table class="table">
+				<tr>
+					<th>名前</th>
+					<th><%= @user.name %></th>
+				</tr>
+
+				<tr>
+					<th>一言</th>
+					<th><%= @user.introduction %></th>
+				</tr>
+				<tr>
+					<th><%= @user.name %>さんがフォローしている人</th>
+					<th><%= @user.followings.count %>人</th>
+				</tr>
+				<tr>
+					<th><%= @user.name %>さんをフォローしてくれている人</th>
+					<th><%= @user.followers.count %>人</th>
+				</tr>
+					<tr>
+					<th><% if current_user.following?(@user) %>
+						<%= form_for(current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
+							<%= hidden_field_tag :follow_id, @user.id %>
+							<%= submit_tag 'フォローを外す', class: "col-xs-7 btn btn-danger" %>
+						<% end %>
+							<% else %>
+						<%= form_for(current_user.relationships.build) do |f| %>
+							<%= hidden_field_tag :follow_id, @user.id %>
+							<%= submit_tag 'フォローする', class: "col-xs-7 btn btn-warning" %>
+						<% end %>
+					<% end %>
+					</th>
+				</tr>
+			</table>
+		</div>
+	<% end %>
+	<div class="row">
+		<img src="/assets/rogo_header2_long.png" alt="ライン">
+	</div>
 		<% @posts.each do |post| %>
 			<div class="col-md-3">
       			<div class="card">

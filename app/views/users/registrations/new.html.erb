@@ -27,18 +27,22 @@
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
 
-          <div class="actions" >
-            <%= f.submit "新規登録", class: "btn btn-warning col-xs-2 col-xs-offset-5" %>
+          <div class="field" >
+            <%= f.submit "新規登録", class: "btn btn-warning col-xs-2 col-xs-offset-5" %><br><br>
           </div>
     <% end %>
   </div>
+
+  <div class="row">
+      <img src="/assets/rogo_header2_long.png" alt="ライン">
+    </div>
 
   <div class="row">
     <div class="field">
         <h4>登録済みの方</h4>
     </div>
     <div class="field">
-          <h5><%= link_to "こちら", new_session_path(resource_name), class: "btn btn-warning col-xs-1 col-xs-offset-5" %>からログインしてください。</h5>
+          <p><%= link_to "こちら", new_session_path(resource_name), class: "btn btn-warning" %>からログインしてください。</p>
     </div>
   </div>
 </body>

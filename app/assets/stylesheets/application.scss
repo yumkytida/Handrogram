@@ -36,9 +36,9 @@
 }
 
 header {
-    color: white;
+    color: #593e0d;
     font-family: "Meiryo";
-    background-color: #593E0D;
+    background-image: image-url("header_back.jpg");
 }
 
  body{
@@ -62,7 +62,7 @@ header {
 .card {
   width: 260px;
   hight: 340px;
-  background-image: image-url("cookie.png");
+  background-image: image-url("cookie2_2.png");
   margin: 30px 40px;
   padding: 37px;
 }
@@ -81,4 +81,7 @@ li {
   display: inline-flex;
 }
 
+footer {
+  margin-top: 80px;
 
+}
