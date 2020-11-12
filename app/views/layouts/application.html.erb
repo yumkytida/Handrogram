@@ -15,9 +15,9 @@
 
         <nav class="nav navbar-nav navbar-left">
           <% if user_signed_in? %>
-          <li><%= link_to image_tag("/assets/rogo_header2_2.png"), users_path(current_user) %></li>
+          <li><%= link_to image_tag "rogo_header2.png", alt: "header_logo2", id: "assets", class: "image", users_path(current_user) %></li>
           <% else %>
-          <li><%= link_to image_tag("/assets/rogo_header2_2.png"), "/" %></li>
+          <li><%= link_to image_tag "rogo_header2.png", alt: "header_logo2", id: "assets", class: "image", "/" %></li>
           <% end %>
         </nav>
         <nav>
@@ -50,7 +50,7 @@
     <footer>
       <div class="container">
         <div class="row">
-            <img src="/assets/rogo_header2_long.png" alt="ライン">
+            <%= image_tag "rogo_header2_long.png", alt: "line", id: "assets", class: "image" %>
         </div>
       </div>
     </footer>

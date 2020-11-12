@@ -1,7 +1,7 @@
 <body>
 	<h2>投稿詳細</h2>
 		<div class="row">
-			<img src="/assets/rogo_header2_long.png" alt="ライン">
+			<%= image_tag "rogo_header2_long.png", alt: "line", id: "assets", class: "image" %>
 		</div>
 		<%= link_to user_path(@post.user) do %>
 			<div class="col-xs-6 col-md-offset-3">
@@ -35,7 +35,7 @@
 		</div>
 
 		<div class="row">
-			<img src="/assets/rogo_header2_long.png" alt="ライン">
+			<%= image_tag "rogo_header2_long.png", alt: "line", id: "assets", class: "image" %>
 		</div>
 
 		<table class="table">
