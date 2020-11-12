@@ -15,9 +15,15 @@
 
         <nav class="nav navbar-nav navbar-left">
           <% if user_signed_in? %>
-          <li><%= link_to image_tag ("/assets/images/rogo_header2.png", alt: "header_logo2"), users_path(current_user) %></li>
+          <li><%= link_to users_path(current_user) do  %>
+                <%= image_tag("rogo_header2.png", alt: "header_logo2") %>
+              <% end %>
+          </li>
           <% else %>
-          <li><%= link_to image_tag ("/assets/images/rogo_header2.png", alt: "header_logo2"), "/" %></li>
+          <li><%= link_to root_path do  %>
+                <%= image_tag("rogo_header2.png", alt: "header_logo2") %>
+                <% end %>
+          </li>
           <% end %>
         </nav>
         <nav>
