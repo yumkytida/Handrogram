@@ -9,7 +9,7 @@ AddMissingUniqueIndices.class_eval do
 
     remove_index ActsAsTaggableOn.taggings_table, name: 'taggings_taggable_context_idx'
     add_index ActsAsTaggableOn.taggings_table,
-              [:tag_id, :taggable_id, :taggable_type, :context, :tagger_id, :tagger_type],
+              [:taggable_id, :taggable_type, :context, :tagger_id, :tagger_type],
               unique: true, name: 'taggings_idx'
   end
 
