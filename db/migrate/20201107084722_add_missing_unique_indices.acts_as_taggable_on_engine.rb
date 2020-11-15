@@ -6,7 +6,6 @@ else
 end
 AddMissingUniqueIndices.class_eval do
   def self.up
-    add_index ActsAsTaggableOn.tags_table, :name, unique: true
 
     remove_index ActsAsTaggableOn.taggings_table, name: 'taggings_taggable_context_idx'
     add_index ActsAsTaggableOn.taggings_table,
@@ -15,8 +14,6 @@ AddMissingUniqueIndices.class_eval do
   end
 
   def self.down
-    remove_index ActsAsTaggableOn.tags_table, :name
-
     remove_index ActsAsTaggableOn.taggings_table, name: 'taggings_idx'
 
     add_index ActsAsTaggableOn.taggings_table, [:taggable_id, :taggable_type, :context], name: 'taggings_taggable_context_idx'
